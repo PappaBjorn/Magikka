@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance
     { get; private set; }
 
+    public GameObject player;
+
     [System.NonSerialized] public Camera gameCamera;
 
     [System.NonSerialized] public Test.Player[] activePlayers = new Test.Player[MAX_PLAYERS];
