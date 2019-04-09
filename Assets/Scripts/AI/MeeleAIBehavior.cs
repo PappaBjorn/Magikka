@@ -4,7 +4,7 @@ using System.Collections;
 
 public class MeeleAIBehavior : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    public TestPlayer player;
     public bool bIsAttacking = false;
 
     PathPatrol pathPatrol;
@@ -15,8 +15,14 @@ public class MeeleAIBehavior : MonoBehaviour
     private void Awake()
     {
         pathPatrol = GetComponent<PathPatrol>();
-        player = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        player = collision.gameObject.GetComponent<TestPlayer>();
+
+        player.HealthComp -= 1;
     }
 
     private void Update()
@@ -39,4 +45,5 @@ public class MeeleAIBehavior : MonoBehaviour
             pathPatrol.MoveToNextPatrolPoint();
         }
     }
+
 }
