@@ -4,7 +4,7 @@ using UnityEngine;
 public class PathPatrol : MonoBehaviour
 {
     public GameObject[] PathGoals = new GameObject[5];
-    GameObject CurrentPatrolPoint;
+    public GameObject CurrentPatrolPoint;
 
     private NavMeshAgent nav;
 
@@ -25,9 +25,12 @@ public class PathPatrol : MonoBehaviour
 
     public void MoveToNextPatrolPoint()
     {
+        if (aiBehavior.bIsAttacking == true)
+            return;
+
         float distance = Vector3.Distance(transform.position, CurrentPatrolPoint.transform.position);
 
-        if(distance < 1f && aiBehavior.bIsAttacking == false)
+        if(distance < 1f)
         {
             if (CurrentPatrolPoint == null || CurrentPatrolPoint == PathGoals[4])
                 CurrentPatrolPoint = PathGoals[0];
